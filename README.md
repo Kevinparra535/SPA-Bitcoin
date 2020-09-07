@@ -1,4 +1,9 @@
-# bitcoin
+# Bitcoin Exchange
+
+## Tailwind CSS
+```
+vue add @ianaya89/tailwind
+```
 
 ## Project setup
 ```
