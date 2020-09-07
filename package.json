@@ -51,5 +51,23 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "description": "## Tailwind CSS ``` vue add @ianaya89/tailwind ```",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kevinparra535/SPA-Bitcoin.git"
+  },
+  "keywords": [
+    "Javascript",
+    "Babel",
+    "Tailwind",
+    "Vue"
+  ],
+  "author": "Kevin Parra <kevinparra535@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kevinparra535/SPA-Bitcoin/issues"
+  },
+  "homepage": "https://github.com/Kevinparra535/SPA-Bitcoin#readme"
 }
