@@ -16,8 +16,8 @@ export default {
 
   data() {
     return {
-      assets: [],
-      isLoading: false
+      isLoading: false,
+      assets: []
     };
   },
 

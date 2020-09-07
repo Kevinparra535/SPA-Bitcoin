@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'PxButton',
+  name: "PxButton",
 
   props: {
     isLoading: {
@@ -23,8 +23,8 @@ export default {
 
   methods: {
     buttonClick() {
-      this.$emit('custom-click')
+      this.$emit("custom-click");
     }
   }
-}
+};
 </script>

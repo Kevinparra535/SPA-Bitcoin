@@ -50,22 +50,27 @@
 
         <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
           <button
+            @click="toggleConverter"
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
           >
-            Cambiar
+            {{ fromUsd ? `USD a ${asset.symbol}` : `${asset.symbol} a USD` }}
           </button>
 
           <div class="flex flex-row my-5">
             <label class="w-full" for="convertValue">
               <input
+                v-model="convertValue"
                 id="convertValue"
                 type="number"
                 class="text-center bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+                :placeholder="`Valor en ${fromUsd ? 'USD' : asset.symbol}`"
               />
             </label>
           </div>
 
-          <span class="text-xl"></span>
+          <span class="text-xl"
+            >{{ convertResult }} {{ fromUsd ? asset.symbol : "USD" }}</span
+          >
         </div>
       </div>
 
@@ -74,7 +79,7 @@
         :colors="['orange']"
         :min="min"
         :max="max"
-        :data="history.map((h) => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
+        :data="history.map(h => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
       />
 
       <h3 class="text-xl my-10">Mejores Ofertas de Cambio</h3>
@@ -97,7 +102,6 @@
             >
               <slot>Obtener Link</slot>
             </px-button>
-
             <a v-else class="hover:underline text-green-600" target="_blanck">{{
               m.url
             }}</a>
@@ -123,27 +127,47 @@ export default {
       asset: {},
       history: [],
       markets: [],
+      fromUsd: true,
+      convertValue: null
     };
   },
 
   computed: {
+    convertResult() {
+      if (!this.convertValue) {
+        return 0;
+      }
+
+      const result = this.fromUsd
+        ? this.convertValue / this.asset.priceUsd
+        : this.convertValue * this.asset.priceUsd;
+
+      return result.toFixed(4);
+    },
+
     min() {
       return Math.min(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
+        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
     },
 
     max() {
       return Math.max(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
+        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
     },
 
     avg() {
       return Math.abs(
-        ...this.history.map((h) => parseFloat(h.priceUsd).toFixed(2))
+        ...this.history.map(h => parseFloat(h.priceUsd).toFixed(2))
       );
-    },
+    }
+  },
+
+  watch: {
+    $route() {
+      this.getCoin();
+    }
   },
 
   created() {
@@ -151,6 +175,10 @@ export default {
   },
 
   methods: {
+    toggleConverter() {
+      this.fromUsd = !this.fromUsd;
+    },
+
     getWebSite(exchange) {
       this.$set(exchange, "isLoading", true);
 
@@ -171,7 +199,7 @@ export default {
       Promise.all([
         api.getAsset(id),
         api.getAssetHistory(id),
-        api.getMarkets(id),
+        api.getMarkets(id)
       ])
         .then(([asset, history, markets]) => {
           this.asset = asset;
@@ -179,8 +207,8 @@ export default {
           this.markets = markets;
         })
         .finally(() => (this.isLoading = false));
-    },
-  },
+    }
+  }
 };
 </script>
 
