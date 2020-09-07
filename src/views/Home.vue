@@ -26,7 +26,8 @@ export default {
 
     api
       .getAssets()
-      .then(assets => (this.assets = assets)).finally(() => (this.isLoading = false));
+      .then(assets => (this.assets = assets))
+      .finally(() => (this.isLoading = false));
   }
 };
 </script>
