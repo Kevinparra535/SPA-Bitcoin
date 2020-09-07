@@ -1,12 +1,10 @@
 <template>
-  <table>
+  <table class="w-full">
     <thead>
-      <tr class="bg-gray-100 border-b-2 border-gray-400">
+      <tr class="bg-gray-300 border-b-2 border-gray-800 cursor-default">
         <th></th>
         <th :class="{ up: this.sortOrder === 1, down: this.sortOrder === -1 }">
-          <span class="underline cursor-pointer" @click="changeSortOrder"
-            >Ranking</span
-          >
+          <span class="cursor-pointer" @click="changeSortOrder"> Ranking</span>
         </th>
         <th>Nombre</th>
         <th>Precio</th>
@@ -14,7 +12,7 @@
         <th>Variación 24hs</th>
         <td class="hidden sm:block">
           <input
-            class="bg-gray-100 focus:outline-none border-b border-gray-400 py-2 px-4 block w-full appearance-none leading-normal"
+            class="bg-gray-100 focus:outline-purple-500 border border-purple-400 py-2 px-4 block w-full appearance-none leading-normal rounded-lg"
             id="filter"
             placeholder="Buscar..."
             type="text"
@@ -43,11 +41,11 @@
         </td>
         <td>
           <router-link
-            class="hover:underline text-green-600"
+            class="hover:underline text-orange-700 font-normal"
             :to="{ name: 'coin-detail', params: { id: a.id } }"
             >{{ a.name }}</router-link
           >
-          <small class="ml-1 text-gray-500">{{ a.symbol }}</small>
+          <small class="ml-1 text-gray-800">{{ a.symbol }}</small>
         </td>
         <td>{{ a.priceUsd | dollar }}</td>
         <td>{{ a.marketCapUsd | dollar }}</td>

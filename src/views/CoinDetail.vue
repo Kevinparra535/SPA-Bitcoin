@@ -1,7 +1,7 @@
 <template>
   <div class="flex-col">
     <div class="flex justify-center">
-      <bounce-loader :loading="isLoading" :color="'#68d391'" :size="100" />
+      <bounce-loader :loading="isLoading" :color="'#512da8'" :size="100" />
     </div>
     <template v-if="!isLoading">
       <div class="flex flex-col sm:flex-row justify-around items-center">
@@ -51,7 +51,7 @@
         <div class="my-10 sm:mt-0 flex flex-col justify-center text-center">
           <button
             @click="toggleConverter"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded"
           >
             {{ fromUsd ? `USD a ${asset.symbol}` : `${asset.symbol} a USD` }}
           </button>
@@ -76,14 +76,16 @@
 
       <line-chart
         class="my-10"
-        :colors="['orange']"
+        :colors="['purple']"
         :min="min"
         :max="max"
         :data="history.map(h => [h.date, parseFloat(h.priceUsd).toFixed(2)])"
       />
 
-      <h3 class="text-xl my-10">Mejores Ofertas de Cambio</h3>
-      <table>
+      <h3 class="text-3xl font-bold my-10 text-purple-800">
+        Mejores Ofertas de Cambio
+      </h3>
+      <table class="w-full">
         <tr
           v-for="m in markets"
           :key="`${m.exchangeId}-${m.priceUsd}`"
@@ -102,9 +104,12 @@
             >
               <slot>Obtener Link</slot>
             </px-button>
-            <a v-else class="hover:underline text-green-600" target="_blanck">{{
-              m.url
-            }}</a>
+            <a
+              v-else
+              class="hover:underline text-purple-600"
+              target="_blanck"
+              >{{ m.url }}</a
+            >
           </td>
         </tr>
       </table>
