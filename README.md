@@ -1,5 +1,9 @@
 # Bitcoin Exchange
 
+## Visualizacion del sitio
+
+demostracion del proyecto: https://bitcoinxchange.netlify.app/
+
 ## Tailwind CSS
 ```
 vue add @ianaya89/tailwind
